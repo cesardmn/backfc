@@ -20,20 +20,16 @@ class About(models.Model):
 
 class Products(models.Model):
     PRODUCTS_CHOICES = (
-        ('C', 'combo'),
-        ('L', 'marmita'),
+        ('combo', 'Combo Caseiro'),
+        ('fit', 'Marmita Fit'),
+        ('lowcarb', 'Marmita Low Carb'),
     )
 
     product = models.CharField(
-        max_length=1,
+        max_length=255,
         choices=PRODUCTS_CHOICES,
         blank=False,
         null=False,
-        verbose_name='sobre'
-    )
-
-    type= models.CharField(
-        max_length=255,
         verbose_name='tipo'
     )
 

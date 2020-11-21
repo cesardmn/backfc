@@ -136,5 +136,10 @@ class Combo(models.Model):
     massas = models.PositiveSmallIntegerField(default=0)
     peixe = models.PositiveSmallIntegerField(default=0)
 
+    active = models.BooleanField(
+        default=False,
+        verbose_name='ativo'
+    )
+
     def __str__(self):
         return self.name
