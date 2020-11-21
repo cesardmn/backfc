@@ -32,6 +32,11 @@ class Products(models.Model):
         verbose_name='sobre'
     )
 
+    type= models.CharField(
+        max_length=255,
+        verbose_name='tipo'
+    )
+
     about = models.TextField(
         verbose_name='sobre'
     )
