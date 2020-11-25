@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.forms.widgets import Textarea
 from .models import *
 
 
@@ -13,6 +14,15 @@ def desativar(modeladmin, request, queryset):
         item.active = False
         item.save()
 
+def ativar_desconto(modeladmin, request, queryset):
+    for item in queryset:
+        item.discount = True
+        item.save()
+
+def desativar_desconto(modeladmin, request, queryset):
+    for item in queryset:
+        item.discount = False
+        item.save()
 
 @admin.register(Combo)
 class ComboAdmin(admin.ModelAdmin):
@@ -24,8 +34,11 @@ class ComboAdmin(admin.ModelAdmin):
         'massas',
         'peixe',
         'active'
-
     )
+
+    list_filter = ('active',)
+
+    ordering = ('id',)
 
     actions = (
         ativar,
@@ -39,17 +52,23 @@ class FitAdmin(admin.ModelAdmin):
         'id',
         'name',
         'price',
-        'active'
+        'active',
+        'discount'
     )
 
-    list_display_links = (
-        'name',
-    )
+    list_display_links = ('id', 'name', 'price')
 
-    actions = (
-        ativar,
-        desativar
-    )
+    list_filter = ('active', 'discount',)
+
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+        },
+    }
 
 
 @admin.register(LowCarb)
@@ -58,38 +77,46 @@ class LowCarbAdmin(admin.ModelAdmin):
         'id',
         'name',
         'price',
-        'active'
+        'active',
+        'discount'
     )
 
-    list_display_links = (
-        'name',
-    )
+    list_display_links = ('id', 'name', 'price')
 
-    actions = (
-        ativar,
-        desativar
-    )
+    list_filter = ('active', 'discount',)
+
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+        },
+    }
 
 
 @admin.register(Portion)
 class PortionAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'type',
         'name',
         'price',
-        'active'
+        'active',
+        'discount'
     )
 
-    list_display_links = (
-        'name',
-    )
+    list_display_links = ('id', 'type','name', 'price')
 
-    list_filter = (
-        'type',
-        'active'
-    )
+    list_filter = ('type', 'active', 'discount',)
 
-    actions = (
-        ativar,
-        desativar
-    )
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+        },
+    }
