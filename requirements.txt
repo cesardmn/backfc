@@ -22,6 +22,6 @@ python-decouple==3.3
 pytz==2020.4
 sqlparse==0.4.1
 toml==0.10.2
-traitlets==5.0.5
+traitlets==4.3.3
 wcwidth==0.2.5
 whitenoise==5.2.0
