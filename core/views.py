@@ -4,9 +4,9 @@ from informations.models import *
 
 
 def getInformations(request):
-    combo_info = Products.objects.filter(product='combo')[0]
-    fit_info = Products.objects.filter(product='fit')[0]
-    lowcarb_info = Products.objects.filter(product='lowcarb')[0]
+    combo_info = Products.objects.filter(product='combo').order_by('id')[0]
+    fit_info = Products.objects.filter(product='fit').order_by('id')[0]
+    lowcarb_info = Products.objects.filter(product='lowcarb').order_by('id')[0]
     about_info = About.objects.all()[0]
     contact_info = Contact.objects.all()[0]
     delivery_info = Delivery.objects.all()[0]
@@ -16,7 +16,7 @@ def getInformations(request):
         'fit': getFits(),
         'lowcarb': getLowCarbs(),
         'combos': getCombos(),
-        'acompnhamentos': getPortions(1),
+        'acompanhamentos': getPortions(1),
         'carnes': getPortions(2),
         'frangos': getPortions(3),
         'massas': getPortions(4),
@@ -62,7 +62,7 @@ def getInformations(request):
 
 
 def getFits():
-    fits = Fit.objects.filter(active=True)
+    fits = Fit.objects.filter(active=True).order_by('id')
     data = []
     for fit in fits:
         data.append({
@@ -81,7 +81,7 @@ def getFits():
 
 
 def getLowCarbs():
-    lowcarbs = LowCarb.objects.filter(active=True)
+    lowcarbs = LowCarb.objects.filter(active=True).order_by('id')
     data = []
     for lowcarb in lowcarbs:
         data.append({
@@ -101,7 +101,7 @@ def getLowCarbs():
 
 def getCombos():
 
-    combos = Combo.objects.filter(active=True)
+    combos = Combo.objects.filter(active=True).order_by('id')
     data = []
     for combo in combos:
         data.append({
@@ -119,7 +119,7 @@ def getCombos():
 
 
 def getPortions(portion_type):
-    portions = Portion.objects.filter(active=True, type=portion_type)
+    portions = Portion.objects.filter(active=True, type=portion_type).order_by('id')
     data = []
     for portion in portions:
         data.append({
