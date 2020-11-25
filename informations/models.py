@@ -34,7 +34,7 @@ class Products(models.Model):
     )
 
     about = models.TextField(
-        verbose_name='sobre'
+        verbose_name='sobre',
     )
 
     amount = models.CharField(
@@ -44,7 +44,7 @@ class Products(models.Model):
 
     class Meta:
         verbose_name = 'Produto'
-        verbose_name_plural = 'Produtos  '
+        verbose_name_plural = 'Produtos'
 
     def __str__(self):
         return self.product
