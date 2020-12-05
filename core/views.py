@@ -13,51 +13,48 @@ def getInformations(request):
     order_info = Order.objects.all()[0]
 
     data = {
-        'fit': getFits(),
-        'lowcarb': getLowCarbs(),
-        'combos': getCombos(),
-        'acompanhamentos': getPortions(1),
-        'carnes': getPortions(2),
-        'frangos': getPortions(3),
-        'massas': getPortions(4),
-        'peixes': getPortions(5),
+        'products': {
+            'lunches': {
+                'fits': getFits(),
+                'lowcarbs': getLowCarbs()
+            },
+            'combos': getCombos()
+        },
         'info': {
-            'cards': [
-                {
-                    'title': 'combo caseiro',
-                    'type': 'combo',
-                    'content': [
-                        combo_info.about,
-                        f'Embalagem de {combo_info.amount}ml (cada porção).'
-                    ]
-                },
-                {
-                    'title': 'marmita fit',
-                    'type': 'fit',
-                    'content': [
-                        fit_info.about,
-                        f'Embalagem de {fit_info.amount}ml.'
-                    ]
-                },
-                {
-                    'title': 'marmita low carb',
-                    'type': 'lowcarb',
-                    'content': [
-                        lowcarb_info.about,
-                        f'Embalagem de {lowcarb_info.amount}ml.'
-                    ]
-                }
-            ],
+            'combo': {
+                'title': 'combo caseiro',
+                'type': 'combo',
+                'content': [
+                    combo_info.about,
+                    f'Embalagem de {combo_info.amount}ml (cada porção).'
+                ]
+            },
+            'fit': {
+                'title': 'marmita fit',
+                'type': 'fit',
+                'content': [
+                    fit_info.about,
+                    f'Embalagem de {fit_info.amount}ml.'
+                ]
+            },
+            'lowcarb': {
+                'title': 'marmita low carb',
+                'type': 'lowcarb',
+                'content': [
+                    lowcarb_info.about,
+                    f'Embalagem de {lowcarb_info.amount}ml.'
+                ]
+            },
             'about': [about_info.info_one, about_info.info_two],
             'contact': [
                 f'(21) {contact_info.whatsapp[:5]}-{contact_info.whatsapp[4:]}',
                 contact_info.instagram
             ],
             'delivery': [delivery_info.info_one, delivery_info.info_two],
-            'order': [order_info.info_one, order_info.info_two]
+            'order': [order_info.info_one, order_info.info_two],
         }
-
     }
+
     return JsonResponse(data)
 
 
@@ -74,7 +71,8 @@ def getFits():
             'hot': fit.discount,
             'type': 'fit',
             'sale': fit.sale,
-            'amount': 0
+            'amount': 0,
+            'itemType': 'lunch'
         })
 
     return data
@@ -93,7 +91,8 @@ def getLowCarbs():
             'hot': lowcarb.discount,
             'type': 'lowcarb',
             'sale': lowcarb.sale,
-            'amount': 0
+            'amount': 0,
+            'itemType': 'lunch'
         })
 
     return data
@@ -104,31 +103,82 @@ def getCombos():
     combos = Combo.objects.filter(active=True).order_by('id')
     data = []
     for combo in combos:
-        data.append({
-            "id": combo.id,
-            "title": combo.name,
-            combo.acompanhamentos and "acompanhamento": combo.acompanhamentos,
-            combo.carnes and "carne": combo.carnes,
-            combo.frangos and "frango": combo.frangos,
-            combo.massas and "massa": combo.massas,
-            combo.peixe and "peixe": combo.peixe,
-            combo.active and "active": combo.active
-        })
+        if combo.active == True:
+            data.append({
+                'id': combo.id,
+                'title': combo.name,
+                'active': combo.active,
+                'portions': getPortions(combo)
+            })
 
     return data
 
 
-def getPortions(portion_type):
-    portions = Portion.objects.filter(active=True, type=portion_type).order_by('id')
+def getPortions(combo):
     data = []
-    for portion in portions:
-        data.append({
-            "id": portion.id,
-            "name": portion.name,
-            "price": portion.price,
-            "active": portion.active,
-            "hot": portion.discount,
-            "sale": portion.sale
-        })
+    combo.acompanhamentos > 0 and data.append(
+        {
+            'id': 1,
+            'name': 'acompanhamentos',
+            'choice_amount': combo.acompanhamentos,
+            'items': getPortionItems(1)
+        }
+    )
 
+    combo.carnes > 0 and data.append(
+        {
+            'id': 2,
+            'name': 'carnes',
+            'choice_amount': combo.carnes,
+            'items': getPortionItems(2)
+        }
+    )
+
+    combo.frangos > 0 and data.append(
+        {
+            'id': 3,
+            'name': 'frangos',
+            'choice_amount': combo.frangos,
+            'items': getPortionItems(3)
+        }
+    )
+
+    combo.massas > 0 and data.append(
+        {
+            'id': 4,
+            'name': 'massas',
+            'choice_amount': combo.massas,
+            'items': getPortionItems(4)
+        }
+    )
+
+    combo.peixe > 0 and data.append(
+        {
+            'id': 5,
+            'name': 'peixes',
+            'choice_amount': combo.peixe,
+            'items': getPortionItems(5)
+        }
+    )
+
+    return data
+
+
+def getPortionItems(portion):
+    items = Portion.objects.filter(active=True, type=portion).order_by('id')
+
+    data = []
+
+    for item in items:
+        if item.active:
+            data.append(
+                {
+                    'id': item.id,
+                    'name': item.name,
+                    'price': item.price,
+                    'active': item.active,
+                    'hot': item.discount,
+                    'sale': item.sale
+                }
+            )
     return data
