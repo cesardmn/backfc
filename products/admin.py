@@ -52,6 +52,7 @@ class FitAdmin(admin.ModelAdmin):
         'id',
         'name',
         'price',
+        'sale',
         'active',
         'discount'
     )
