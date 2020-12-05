@@ -66,7 +66,7 @@ def getFits():
             'id': fit.id,
             'title': fit.type,
             'name': fit.name,
-            'price': fit.price,
+            'price': fit.sale,
             'active': fit.active,
             'hot': fit.discount,
             'type': 'fit',
@@ -86,7 +86,7 @@ def getLowCarbs():
             'id': lowcarb.id,
             'title': lowcarb.type,
             'name': lowcarb.name,
-            'price': lowcarb.price,
+            'price': lowcarb.sale,
             'active': lowcarb.active,
             'hot': lowcarb.discount,
             'type': 'lowcarb',
@@ -175,7 +175,7 @@ def getPortionItems(portion):
                 {
                     'id': item.id,
                     'name': item.name,
-                    'price': item.price,
+                    'price': item.sale,
                     'active': item.active,
                     'hot': item.discount,
                     'sale': item.sale
