@@ -24,7 +24,7 @@ class Fit(models.Model):
 
     @property
     def sale(self):
-        if self.active == True:
+        if self.discount == True:
             return float(self.price) * 0.9
         else:
             return float(self.price)
@@ -60,7 +60,7 @@ class LowCarb(models.Model):
 
     @property
     def sale(self):
-        if self.active == True:
+        if self.discount == True:
             return float(self.price) * 0.9
         else:
             return float(self.price)
@@ -115,7 +115,7 @@ class Portion(models.Model):
 
     @property
     def sale(self):
-        if self.active == True:
+        if self.discount == True:
             return float(self.price) * 0.9
         else:
             return float(self.price)
