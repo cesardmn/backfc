@@ -31,10 +31,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:3000',
     'https://www.fogaocaseiro.com.br/index.php',
-    'http://192.168.0.16:3000'
+    'https://fogaocaseiro.vercel.app/'
 ]
 
 
