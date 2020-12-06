@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
     'https://www.fogaocaseiro.com.br/index.php',
-    'https://fogaocaseiro.vercel.app/'
+    'https://fogaocaseiro.vercel.app/menu'
 ]
 
 
