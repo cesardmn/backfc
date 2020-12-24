@@ -35,7 +35,7 @@ class ItemGroupAdmin(admin.ModelAdmin):
 
 @admin.register(ItemType)
 class ItemTypeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'packge_amount')
+    list_display = ('name', 'package')
 
 
 @admin.register(Item)

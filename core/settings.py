@@ -30,10 +30,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
-CORS_ALLOWED_ORIGINS = [
-    'https://www.fogaocaseiro.com.br/index.php',
-    'https://fogaocaseiro.vercel.app/menu'
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'https://www.fogaocaseiro.com.br/index.php',
+#     'https://fogaocaseiro.vercel.app/menu'
+# ]
 
 
 # Application definition
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'informations',
     'products',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [

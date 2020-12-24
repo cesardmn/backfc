@@ -168,7 +168,7 @@ class ItemType(models.Model):
         unique=True
     )
 
-    packge_amount = models.PositiveSmallIntegerField(
+    package = models.PositiveSmallIntegerField(
         verbose_name='embalagem (ml)'
     )
 
