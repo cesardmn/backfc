@@ -195,7 +195,7 @@ class Item(models.Model):
     )
 
     description = models.CharField(
-        max_length=100,
+        max_length=255,
         verbose_name='descrição'
     )
 
