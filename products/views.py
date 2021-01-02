@@ -4,5 +4,5 @@ from .models import Item
 from .serializers import ItemSerializer
 
 class ItemViewSet(viewsets.ModelViewSet):
-    queryset = Item.objects.all()
+    queryset = Item.objects.filter(active=True)
     serializer_class = ItemSerializer

@@ -1,7 +1,7 @@
 from django.contrib import admin
 import locale
 from django.forms.widgets import Textarea
-from .models import Item, ItemGroup, ItemType
+from .models import Combo, Fit, Item, ItemGroup, ItemType, LowCarb, Portion
 
 
 def ativar(modeladmin, request, queryset):
@@ -70,3 +70,102 @@ class ItemAdmin(admin.ModelAdmin):
         locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
         return locale.currency(obj.sale_price)
     sale_price_format.short_description = 'preço de venda'
+
+
+@admin.register(Combo)
+class ComboAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'acompanhamentos',
+        'carnes',
+        'frangos',
+        'massas',
+        'peixe',
+        'active'
+    )
+
+    list_filter = ('active',)
+
+    ordering = ('id',)
+
+    actions = (
+        ativar,
+        desativar
+    )
+
+
+@admin.register(Fit)
+class FitAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'price',
+        'sale',
+        'active',
+        'discount'
+    )
+
+    list_display_links = ('id', 'name', 'price')
+
+    list_filter = ('active', 'discount',)
+
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    # formfield_overrides = {
+    #     models.TextField: {
+    #         'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+    #     },
+    # }
+
+
+@admin.register(LowCarb)
+class LowCarbAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'price',
+        'active',
+        'discount'
+    )
+
+    list_display_links = ('id', 'name', 'price')
+
+    list_filter = ('active', 'discount',)
+
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    # formfield_overrides = {
+    #     models.TextField: {
+    #         'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+    #     },
+    # }
+
+
+@admin.register(Portion)
+class PortionAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'type',
+        'name',
+        'price',
+        'active',
+        'discount'
+    )
+
+    list_display_links = ('id', 'type','name', 'price')
+
+    list_filter = ('type', 'active', 'discount',)
+
+    ordering = ('id',)
+
+    actions = (ativar, desativar, ativar_desconto, desativar_desconto)
+
+    # formfield_overrides = {
+    #     models.TextField: {
+    #         'widget': Textarea(attrs={'rows': 2, 'cols': 45})
+    #     },
+    # }
