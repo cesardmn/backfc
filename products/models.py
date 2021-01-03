@@ -153,6 +153,10 @@ class ItemGroup(models.Model):
         unique=True
     )
 
+    min_order = models.SmallIntegerField(
+        verbose_name='pedido mínimo'
+    )
+
     def __str__(self):
         return self.name
 
