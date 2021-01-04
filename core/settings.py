@@ -28,10 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 # DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'https://fogao-caseiro-front.vercel.app'
 ]
 
 
