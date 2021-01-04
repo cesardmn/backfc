@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from decouple import config, Csv
+
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,9 +30,9 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 # DEBUG = False
 
-CORS_ALLOWED_ORIGINS = [
-    'https://fogao-caseiro-front.vercel.app'
-]
+# ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
