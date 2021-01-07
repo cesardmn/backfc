@@ -30,7 +30,7 @@ def desativar_desconto(modeladmin, request, queryset):
 
 @admin.register(ItemGroup)
 class ItemGroupAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('name', 'min_order', 'description')
 
 
 @admin.register(ItemType)

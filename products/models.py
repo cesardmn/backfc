@@ -157,6 +157,11 @@ class ItemGroup(models.Model):
         verbose_name='pedido mínimo'
     )
 
+    description = models.CharField(
+        max_length=255,
+        verbose_name='descrição',
+    )
+
     def __str__(self):
         return self.name
 
@@ -174,6 +179,10 @@ class ItemType(models.Model):
 
     package = models.PositiveSmallIntegerField(
         verbose_name='embalagem (ml)'
+    )
+
+    menu_page = models.PositiveSmallIntegerField(
+        verbose_name='página do cardápio'
     )
 
     def __str__(self):
