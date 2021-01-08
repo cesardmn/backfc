@@ -1,7 +1,8 @@
 from django.contrib import admin
 import locale
+from django.db import models
 from django.forms.widgets import Textarea
-from .models import Combo, Fit, Item, ItemGroup, ItemType, LowCarb, Portion
+from .models import Item, ItemGroup, ItemType
 
 
 def ativar(modeladmin, request, queryset):
@@ -32,10 +33,22 @@ def desativar_desconto(modeladmin, request, queryset):
 class ItemGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'min_order', 'description')
 
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 25})
+        },
+    }
+
 
 @admin.register(ItemType)
 class ItemTypeAdmin(admin.ModelAdmin):
     list_display = ('name', 'package')
+
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 25})
+        },
+    }
 
 
 @admin.register(Item)
@@ -69,4 +82,11 @@ class ItemAdmin(admin.ModelAdmin):
     def sale_price_format(self, obj):
         locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
         return locale.currency(obj.sale_price)
+
     sale_price_format.short_description = 'preço de venda'
+
+    formfield_overrides = {
+        models.TextField: {
+            'widget': Textarea(attrs={'rows': 2, 'cols': 30})
+        },
+    }

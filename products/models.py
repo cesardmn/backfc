@@ -12,8 +12,7 @@ class ItemGroup(models.Model):
         verbose_name='pedido mínimo'
     )
 
-    description = models.CharField(
-        max_length=255,
+    description = models.TextField(
         verbose_name='descrição',
     )
 
@@ -33,7 +32,13 @@ class ItemType(models.Model):
     )
 
     package = models.PositiveSmallIntegerField(
-        verbose_name='embalagem (ml)'
+        verbose_name='embalagem (ml)',
+        null=True,
+        blank=True
+    )
+
+    description = models.TextField(
+        verbose_name='descrição (opcional)',
     )
 
     menu_page = models.PositiveSmallIntegerField(
@@ -62,8 +67,7 @@ class Item(models.Model):
         verbose_name='tipo'
     )
 
-    description = models.CharField(
-        max_length=255,
+    description = models.TextField(
         verbose_name='descrição'
     )
 
