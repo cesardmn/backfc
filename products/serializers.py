@@ -6,7 +6,7 @@ from .models import Item, ItemGroup, ItemType
 class ItemGroupSerializers(serializers.ModelSerializer):
     class Meta:
         model = ItemGroup
-        fields = ['name', 'min_order', 'description']
+        fields = ['name', 'min_order', 'description', 'image']
 
 
 class ItemTypeSerializers(serializers.ModelSerializer):

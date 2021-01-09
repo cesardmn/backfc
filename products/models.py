@@ -14,6 +14,12 @@ class ItemGroup(models.Model):
 
     description = models.TextField(
         verbose_name='descrição',
+        null=True,
+        blank=True
+    )
+
+    image = models.ImageField(
+        verbose_name='imagem do grupo'
     )
 
     def __str__(self):
@@ -39,6 +45,8 @@ class ItemType(models.Model):
 
     description = models.TextField(
         verbose_name='descrição (opcional)',
+        null=True,
+        blank=True
     )
 
     menu_page = models.PositiveSmallIntegerField(
