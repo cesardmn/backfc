@@ -8,7 +8,7 @@ django-cors-headers==3.5.0
 django-heroku==0.3.1
 djangorestframework==3.12.2
 gunicorn==20.0.4
-ipython==7.19.0
+ipython
 ipython-genutils==0.2.0
 jedi==0.17.2
 Markdown==3.3.3
@@ -25,6 +25,6 @@ python-decouple==3.3
 pytz==2020.4
 sqlparse==0.4.1
 toml==0.10.2
-traitlets==5.0.5
+traitlets
 wcwidth==0.2.5
 whitenoise==5.2.0
