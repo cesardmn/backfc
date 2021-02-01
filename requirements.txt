@@ -5,3 +5,7 @@ gunicorn
 ipython
 pillow
 python-decouple
+corsheaders
+cloudinary
+django-cloudinary-storage
+django-cors-heade
