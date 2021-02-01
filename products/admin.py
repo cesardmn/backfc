@@ -42,7 +42,9 @@ class ItemGroupAdmin(admin.ModelAdmin):
 
 @admin.register(ItemType)
 class ItemTypeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'package')
+    list_display = ('name', 'package', 'menu_page')
+
+    ordering = ('menu_page',)
 
     formfield_overrides = {
         models.TextField: {
