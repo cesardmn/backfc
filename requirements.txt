@@ -1,10 +1,13 @@
 django
-django-heroku
 djangorestframework
-gunicorn
+django-heroku
 ipython
-pillow
+
+django-cors-headers
 python-decouple
+
+pillow
 cloudinary
 django-cloudinary-storage
-django-cors-headers
+
+gunicorn
