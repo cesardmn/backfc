@@ -5,7 +5,25 @@ from products.models import Item
 # from django.contrib.auth.models import User
 
 
+class ItemSerializer(serializers.ModelSerializer):
+    sale_price = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Item
+        fields = ('id', 'description', 'sale_price')
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    item = ItemSerializer(read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = ('amount', 'item')
+
+
 class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+
     class Meta:
         model = Order
         fields = '__all__'

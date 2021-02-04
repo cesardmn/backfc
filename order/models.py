@@ -20,7 +20,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Pedido')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,
+                              verbose_name='Pedido', related_name='order_items')
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     amount = models.IntegerField(verbose_name='Quantidade')
 
